@@ -61,7 +61,4 @@ public struct OpenAIImageEndpoint: IOpenAIImageEndpoint{
         self.apiKey = apiKey
         self.path = path
     }
-    
-    
-
 }
