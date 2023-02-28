@@ -8,7 +8,7 @@ SwiftUI view that asynchronously loads and displays an OpenAI image from open AP
 - [x] Customizable in term of the transport layer [Loader]
 - [x] Based on interfaces not implementations
 
- ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/ganesha.png) 
+ ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun.png) 
 
 ## How to use
 
