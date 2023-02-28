@@ -7,7 +7,7 @@ SwiftUI view that asynchronously loads and displays an OpenAI image from open AP
 - [x] Customizable in term of SwiftUI Image specs [renderingMode, resizable,  antialiased...]
 - [x] Based on interfaces not implementations
 
- ![The concept](https://github.com/The-Igor/async-http-client/blob/main/img/concept.png) 
+ ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun.png) 
 
 ## How to use
 
