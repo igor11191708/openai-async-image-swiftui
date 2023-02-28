@@ -52,7 +52,7 @@ public final class OpenAIDefaultLoader : IOpenAILoader{
         let body = Input(prompt: prompt, size: size, response_format: .b64)
         
         let headers = ["Authorization": "Bearer \(endpoint.apiKey)"]
-        let path = "/v1/images/generations"
+        let path = endpoint.path
         
         guard let client = client else{
             throw AsyncImageErrors.clientIsNotDefined

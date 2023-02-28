@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  IOpenAIImageEndpoint.swift
 //  
 //
 //  Created by Igor on 28.02.2023.
@@ -20,4 +20,6 @@ public protocol IOpenAIImageEndpoint{
     /// Api key for access
     var apiKey : String { get }
     
+    /// Path to the point
+    var path : String { get }
 }
