@@ -5,6 +5,7 @@
 //  Created by Igor on 28.02.2023.
 //
 
+import SwiftUI
 import async_http_client
 
 #if os(iOS)
@@ -14,8 +15,6 @@ import UIKit.UIImage
 #if os(macOS)
 import AppKit.NSImage
 #endif
-
-import SwiftUI
 
 @available(iOS 15.0, macOS 12.0, *)
 public final class OpenAIDefaultLoader : IOpenAILoader{
@@ -65,7 +64,6 @@ public final class OpenAIDefaultLoader : IOpenAILoader{
         }
         
         return try imageBase64(from: result.value)
-        
     }
         
     /// Decode base64 to Data
