@@ -21,35 +21,35 @@ SwiftUI view that asynchronously loads and displays an OpenAI image from open AP
 
 ### 2. Override the default loader at Environment with you apiKey
 ```swift
-    @Environment(\.openAIDefaultLoader) var loader : OpenAIDefaultLoader
-    
-        let apiKey = "*******************"
-        let endpoint = OpenAIImageEndpoint.get(with: apiKey)
-        let loader = OpenAIDefaultLoader(endpoint: endpoint)
-        
-         ContentView()
-                .environment(\.openAIDefaultLoader, loader)
+@Environment(\.openAIDefaultLoader) var loader : OpenAIDefaultLoader
+
+let apiKey = "*******************"
+let endpoint = OpenAIImageEndpoint.get(with: apiKey)
+let loader = OpenAIDefaultLoader(endpoint: endpoint)
+
+ ContentView()
+        .environment(\.openAIDefaultLoader, loader)
 ```
 
 ### 3. Add **OpenAIAsyncImage** to your code
 
 ```swift
-        OpenAIAsyncImage(prompt: .constant("sun"))
-                       .frame(width: 125, height: 125)
+OpenAIAsyncImage(prompt: .constant("sun"))
+               .frame(width: 125, height: 125)
 ```
 or with custom **ViewBuilder**
 
 ```swift
-        OpenAIAsyncImage(prompt: $imageText, size: .dpi1024){ state in
-            switch state{
-                case .loaded(let image) :
-                image
-                    .resizable()
-                    .scaledToFill()
-                case .loadError(let error) : Text(error.localizedDescription)
-                case .loading : ProgressView()
-            }
-        }
+OpenAIAsyncImage(prompt: $imageText, size: .dpi1024){ state in
+    switch state{
+        case .loaded(let image) :
+        image
+            .resizable()
+            .scaledToFill()
+        case .loadError(let error) : Text(error.localizedDescription)
+        case .loading : ProgressView()
+    }
+}
 ```
 
 | Param | Description |
