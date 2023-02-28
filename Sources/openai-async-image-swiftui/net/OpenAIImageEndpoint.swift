@@ -8,7 +8,7 @@
 import Foundation
 
 /// Set of specs for acces to OpenAPI image resource
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 public struct OpenAIImageEndpoint: IOpenAIImageEndpoint{
         
     // MARK: - Static
