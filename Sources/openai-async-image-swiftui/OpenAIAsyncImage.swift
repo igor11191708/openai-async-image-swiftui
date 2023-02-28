@@ -156,7 +156,6 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
 
 public extension OpenAIAsyncImage where Content == EmptyView, T == OpenAIDefaultLoader{
     
-    
     /// - Parameters:
     ///   - prompt: Text
     ///   - size: Image size
