@@ -19,7 +19,6 @@ public struct OpenAIImageEndpoint: IOpenAIImageEndpoint{
     /// Http method
     public static var httpMethod = "POST"
     
-    
     /// Path to the point
     public static var path = "/v1/images/generations"
     
@@ -34,7 +33,6 @@ public struct OpenAIImageEndpoint: IOpenAIImageEndpoint{
     }
     
     // MARK: - Config
-    
     
     /// Base url to OpenAPI image resource
     public let urlString: String
