@@ -32,6 +32,7 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
    
     // MARK: - Config
     
+    /// A text description of the desired image(s). The maximum length is 1000 characters
     @Binding var prompt : String
         
     /// Custom loader
