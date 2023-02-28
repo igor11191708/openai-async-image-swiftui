@@ -17,7 +17,7 @@ public enum ImageState{
     /// Loaded
     case loaded(Image)
     
-    /// There's an error happend while fetching
+    /// There's an error happened while fetching
     case loadError(Error)
     
 }

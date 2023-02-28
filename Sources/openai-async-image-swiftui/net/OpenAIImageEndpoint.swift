@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Set of specs for acces to OpenAPI image resource
+/// Set of specs for access to OpenAPI image resource
 @available(iOS 15.0, macOS 12.0, *)
 public struct OpenAIImageEndpoint: IOpenAIImageEndpoint{
         

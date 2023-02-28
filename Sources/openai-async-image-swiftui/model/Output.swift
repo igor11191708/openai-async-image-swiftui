@@ -17,7 +17,7 @@ struct Output: Decodable{
     /// Set of images
     let data: [Base64]
         
-    /// Fist image from the recieved data set
+    /// Fist image from the received data set
     var firstImage : String?{
         data.first?.b64_json
     }

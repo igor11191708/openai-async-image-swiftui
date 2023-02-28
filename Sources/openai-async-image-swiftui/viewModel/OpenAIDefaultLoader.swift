@@ -23,10 +23,10 @@ public final class OpenAIDefaultLoader : IOpenAILoader{
     /// Http async client
     private let client : Http.Proxy<JsonReader, JsonWriter>?
     
-    /// Set of params for making requsts
+    /// Set of params for making requests
     private let endpoint : IOpenAIImageEndpoint
     
-    /// - Parameter endpoint: Set of params for making requsts
+    /// - Parameter endpoint: Set of params for making requests
     public init(endpoint : IOpenAIImageEndpoint) {
         
         self.endpoint = endpoint
@@ -67,7 +67,10 @@ public final class OpenAIDefaultLoader : IOpenAILoader{
         return try imageBase64(from: result.value)
         
     }
-    
+        
+    /// Decode base64 to Data
+    /// - Parameter output: Received format from the endpoint
+    /// - Returns: Decoded data
     private func decodeBase64(from output: Output) throws -> Data?{
         guard let base64 = output.firstImage else  {
             throw AsyncImageErrors.returnedNoImages
