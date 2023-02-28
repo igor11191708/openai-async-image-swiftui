@@ -9,6 +9,7 @@ import Foundation
 
 
 /// Input format to OpenAI API
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct Input: Encodable{
         
     /// A text description of the desired image(s). The maximum length is 1000 characters

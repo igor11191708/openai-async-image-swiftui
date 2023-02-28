@@ -8,6 +8,7 @@
 import Foundation
 
 /// Defines access API to OpenAI image API
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public protocol IOpenAIImageEndpoint{
     
     /// Base url to OpenAPI image resource

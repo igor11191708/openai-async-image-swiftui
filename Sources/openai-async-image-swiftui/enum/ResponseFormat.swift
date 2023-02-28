@@ -8,6 +8,7 @@
 import Foundation
 
 /// Type of response format from OpenAI API
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 enum ResponseFormat: String,Encodable{
     
     case url = "url"

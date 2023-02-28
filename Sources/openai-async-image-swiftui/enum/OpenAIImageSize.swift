@@ -8,6 +8,7 @@
 import Foundation
 
 /// The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public enum OpenAIImageSize: String, Encodable{
     
     case dpi256 = "256x256"
