@@ -19,7 +19,7 @@ SwiftUI view that asynchronously loads and displays an OpenAI image from open AP
 [Where do I find my Secret API Key?](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)
 
 
-### 2. Override default loader at Environment with you apiKey
+### 2. Override the default loader at Environment with you apiKey
 ```swift
     @Environment(\.openAIDefaultLoader) var loader : OpenAIDefaultLoader
     
