@@ -77,7 +77,7 @@ public final class OpenAIDefaultLoader : IOpenAILoader{
         return Data(base64Encoded: base64)
     }
     
-#if os(iOS) || os(watchOS)
+#if os(iOS) || os(watchOS) || os(tvOS)
     /// Base64 encoder for iOS
     /// - Parameter output: OpenAI response type
     /// - Returns: UIImage
