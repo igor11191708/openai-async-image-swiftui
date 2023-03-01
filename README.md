@@ -6,7 +6,7 @@ SwiftUI view that asynchronously loads and displays an OpenAI image from open AP
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fopenai-async-image-swiftui%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/The-Igor/openai-async-image-swiftui)
 
 ## Features
-- [x] Multiplatform iOS, macOS and watchOS
+- [x] Multiplatform iOS, macOS, watchOS and tvOS
 - [x] Customizable in term of SwiftUI Image specs [renderingMode, resizable,  antialiased...]
 - [x] Customizable in term of the transport layer [Loader]
 - [x] Based on interfaces not implementations

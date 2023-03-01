@@ -8,7 +8,7 @@
 import Foundation
 
 /// Output format for OpenAI API
-@available(iOS 15.0, macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct Output: Decodable{
     
     /// Date and time

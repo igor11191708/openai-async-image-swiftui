@@ -16,7 +16,7 @@ import UIKit.UIImage
 import AppKit.NSImage
 #endif
 
-@available(iOS 15.0, macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public final class OpenAIDefaultLoader : IOpenAILoader{
     
     /// Http async client
