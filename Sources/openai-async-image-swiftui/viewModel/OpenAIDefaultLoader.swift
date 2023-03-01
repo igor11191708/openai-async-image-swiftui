@@ -37,7 +37,7 @@ public final class OpenAIDefaultLoader : IOpenAILoader{
         
         client = Http.Proxy(baseURL: url)
     }
-    
+       
     /// Load image by text
     /// - Parameters:
     ///   - prompt: Text
@@ -48,7 +48,7 @@ public final class OpenAIDefaultLoader : IOpenAILoader{
         with size : OpenAIImageSize
     ) async throws -> Image{
         
-        let body = Input(prompt: prompt, size: size, response_format: .b64)
+        let body = Input(prompt: prompt, size: size, response_format: .b64, n: 1)
         
         let headers = ["Authorization": "Bearer \(endpoint.apiKey)"]
         let path = endpoint.path

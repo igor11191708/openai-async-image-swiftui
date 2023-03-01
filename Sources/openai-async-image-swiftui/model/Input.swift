@@ -9,6 +9,7 @@ import Foundation
 
 
 /// Input format to OpenAI API
+/// Given a prompt and/or an input image, the model will generate a new image
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct Input: Encodable{
         
@@ -20,4 +21,7 @@ struct Input: Encodable{
     
     /// The format in which the generated images are returned. Must be one of url or b64_json
     let response_format : ResponseFormat
+    
+    /// The number of images to generate
+    let n : Int
 }
