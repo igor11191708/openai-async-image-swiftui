@@ -68,4 +68,4 @@ OpenAIAsyncImage(prompt: $imageText, size: .dpi1024){ state in
 [OpenAI AsyncImage SwiftUI example](https://github.com/The-Igor/openai-async-image-swiftui-example)
 
 
- ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun.png) 
+ ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun_08.png) 
