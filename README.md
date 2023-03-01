@@ -60,7 +60,7 @@ OpenAIAsyncImage(prompt: $imageText, size: .dpi1024){ state in
 | tpl | Custom view builder tpl |
 | loader | Custom loader if you need something specific|
 
- ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/appletv.png) 
+ ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/appletv_art.png) 
 
 ## Documentation(API)
 - You need to have Xcode 13 installed in order to have access to Documentation Compiler (DocC)
