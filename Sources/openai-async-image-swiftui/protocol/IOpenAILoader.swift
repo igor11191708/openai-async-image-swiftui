@@ -9,7 +9,7 @@ import SwiftUI
 
 /// Loader for getting images
 @available(iOS 15.0, macOS 12.0, *)
-public protocol IOpenAILoader: ObservableObject{
+public protocol IOpenAILoader{
        
     /// Load image by text
     /// - Parameters:

@@ -14,12 +14,11 @@ public protocol IOpenAIImageEndpoint{
     /// Base url to OpenAPI image resource
     var urlString : String { get }
     
-    /// Http method
-    var httpMethod : String { get }
+    /// Path to the point
+    var path : String { get }
     
     /// Api key for access
     var apiKey : String { get }
     
-    /// Path to the point
-    var path : String { get }
+
 }

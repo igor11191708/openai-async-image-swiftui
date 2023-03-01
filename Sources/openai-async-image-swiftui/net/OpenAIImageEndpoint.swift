@@ -16,9 +16,6 @@ public struct OpenAIImageEndpoint: IOpenAIImageEndpoint{
     /// Base url to OpenAPI image resource
     public static var urlString = "https://api.openai.com"
     
-    /// Http method
-    public static var httpMethod = "POST"
-    
     /// Path to the point
     public static var path = "/v1/images/generations"
     
@@ -27,7 +24,6 @@ public struct OpenAIImageEndpoint: IOpenAIImageEndpoint{
     static public func get(with apiKey: String) -> Self{
         .init(
             urlString: Self.urlString,
-            httpMethod: Self.httpMethod,
             apiKey: apiKey,
             path: Self.path)
     }
@@ -37,14 +33,11 @@ public struct OpenAIImageEndpoint: IOpenAIImageEndpoint{
     /// Base url to OpenAPI image resource
     public let urlString: String
     
-    /// Http method
-    public let httpMethod : String
+    /// Path to the point
+    public let path : String
     
     /// Api key for access
     public let apiKey : String
-    
-    /// Path to the point
-    public let path : String
 
     // MARK: - Life circle
     
@@ -53,9 +46,8 @@ public struct OpenAIImageEndpoint: IOpenAIImageEndpoint{
     ///   - httpMethod: Http method
     ///   - apiKey: Api key for access
     ///   - path: Path to the point
-    public init(urlString: String, httpMethod: String, apiKey: String, path: String) {
+    public init(urlString: String, apiKey: String, path: String) {
         self.urlString = urlString
-        self.httpMethod = httpMethod
         self.apiKey = apiKey
         self.path = path
     }
