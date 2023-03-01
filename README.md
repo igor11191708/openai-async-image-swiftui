@@ -11,7 +11,7 @@ SwiftUI view that asynchronously loads and displays an OpenAI image from open AP
 - [x] Customizable in term of the transport layer [Loader]
 - [x] Based on interfaces not implementations
 
- ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun.png) 
+ ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun_watch.png) 
 
 ## How to use
 
@@ -67,3 +67,6 @@ OpenAIAsyncImage(prompt: $imageText, size: .dpi1024){ state in
 ## SwiftUI example for the package
 
 [OpenAI AsyncImage SwiftUI example](https://github.com/The-Igor/openai-async-image-swiftui-example)
+
+
+ ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun.png) 
