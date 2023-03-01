@@ -22,14 +22,10 @@ You just type in any your idea and AI will give you an art solution
 
 ### 2. Override the default loader at Environment with you apiKey
 ```swift
-@Environment(\.openAIDefaultLoader) var loader : OpenAIDefaultLoader
-
-let apiKey = "*******************"
-let endpoint = OpenAIImageEndpoint.get(with: apiKey)
-let loader = OpenAIDefaultLoader(endpoint: endpoint)
-
- ContentView()
-        .environment(\.openAIDefaultLoader, loader)
+    let apiKey = "your API KEY"
+    let endpoint = OpenAIImageEndpoint.get(with: apiKey)
+    let loader = OpenAIDefaultLoader(endpoint: endpoint)
+    OpenAIDefaultLoaderKey.defaultValue = loader
 ```
 
 ### 3. Add **OpenAIAsyncImage** to your code
