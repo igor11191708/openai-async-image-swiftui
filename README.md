@@ -21,6 +21,7 @@ You just type in any your idea and AI will give you an art solution
 
 
 ### 2. Override the default loader at Environment with you apiKey
+
 ```swift
     let apiKey = "your API KEY"
     let endpoint = OpenAIImageEndpoint.get(with: apiKey)
