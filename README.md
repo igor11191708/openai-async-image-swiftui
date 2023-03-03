@@ -1,4 +1,4 @@
-# OpenAI AsyncImage SwiftUI
+# OpenAI DALL·E AsyncImage SwiftUI
 
 SwiftUI view that asynchronously loads and displays an OpenAI image from open API
 You just type in any your idea and AI will give you an art solution
