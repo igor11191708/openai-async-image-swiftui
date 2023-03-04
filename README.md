@@ -3,6 +3,8 @@
 SwiftUI view that asynchronously loads and displays an OpenAI image from open API
 You just type in any your idea and AI will give you an art solution
 
+DALL-E and DALL-E 2 are deep learning models developed by OpenAI to generate digital images from natural language descriptions, called "prompts"
+
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fopenai-async-image-swiftui%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/The-Igor/openai-async-image-swiftui)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fopenai-async-image-swiftui%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/The-Igor/openai-async-image-swiftui)
 
