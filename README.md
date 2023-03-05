@@ -35,22 +35,21 @@ DALL-E and DALL-E 2 are deep learning models developed by OpenAI to generate dig
 ### 3. Add **OpenAIAsyncImage** to your code
 
 ```swift
-OpenAIAsyncImage(prompt: .constant("sun"))
-               .frame(width: 125, height: 125)
+    OpenAIAsyncImage(prompt: .constant("sun"))
 ```
 or with custom **ViewBuilder**
 
 ```swift
-OpenAIAsyncImage(prompt: $imageText, size: .dpi1024){ state in
-    switch state{
-        case .loaded(let image) :
-        image
-            .resizable()
-            .scaledToFill()
-        case .loadError(let error) : Text(error.localizedDescription)
-        case .loading : ProgressView()
+    OpenAIAsyncImage(prompt: $imageText, size: .dpi1024){ state in
+        switch state{
+            case .loaded(let image) :
+            image
+                .resizable()
+                .scaledToFill()
+            case .loadError(let error) : Text(error.localizedDescription)
+            case .loading : ProgressView()
+        }
     }
-}
 ```
 
 | Param | Description |
@@ -71,4 +70,4 @@ OpenAIAsyncImage(prompt: $imageText, size: .dpi1024){ state in
 [OpenAI AsyncImage SwiftUI example](https://github.com/The-Igor/openai-async-image-swiftui-example)
 
 
- ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun_11.png) 
+![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun_11.png) 
