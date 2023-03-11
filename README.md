@@ -72,7 +72,9 @@ or with custom **ViewBuilder**
 
 ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun_11.png) 
 
-## Replicate toolkit for swift (Might be interesting)
+
+## Replicate toolkit for swift 
+*Might be interesting*
 
 [Replicate kit](https://github.com/The-Igor/replicate-kit-swift)
 
