@@ -20,7 +20,4 @@ enum AsyncImageErrors: Error, Equatable{
     /// response returned no images
     case returnedNoImages
     
-    /// Status is not 200
-    case status(Int)
-    
 }

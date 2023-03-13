@@ -6,7 +6,16 @@
       "location" : "https://github.com/The-Igor/async-http-client.git",
       "state" : {
         "branch" : "main",
-        "revision" : "92576110f6f4cd76a5971d9fffdb7cb9d0c6b105"
+        "revision" : "156bb8d3d5bfa6d983060b95c4d0a1d10de29e4b"
+      }
+    },
+    {
+      "identity" : "retry-policy-service",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/The-Igor/retry-policy-service.git",
+      "state" : {
+        "revision" : "46ded002161a95c6b08ddd02c3f319891c773d14",
+        "version" : "1.0.0"
       }
     }
   ],

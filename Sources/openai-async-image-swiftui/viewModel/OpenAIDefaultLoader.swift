@@ -59,10 +59,6 @@ public final class OpenAIDefaultLoader : IOpenAILoader{
         
         let result: Http.Response<Output> = try await client.post(path: path, body: body, headers: headers)
         
-        if let status = result.statusCode, status != 200 {
-            throw AsyncImageErrors.status(status)
-        }
-        
         return try imageBase64(from: result.value)
     }
         
