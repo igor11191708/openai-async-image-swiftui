@@ -74,7 +74,6 @@ or with custom **ViewBuilder**
 
 
 ## Replicate toolkit for swift 
-*Might be interesting*
 
 [Replicate kit](https://github.com/The-Igor/replicate-kit-swift)
 
