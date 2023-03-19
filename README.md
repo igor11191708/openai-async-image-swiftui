@@ -74,7 +74,9 @@ or with custom **ViewBuilder**
 
 
 ## Replicate toolkit for swift 
-
+Announced in 2022, OpenAI's text-to-image model DALL-E 2 is a recent example of diffusion models. It uses diffusion models for both the model's prior (which produces an image embedding given a text caption) and the decoder that generates the final image.
+In machine learning, diffusion models, also known as diffusion probabilistic models, are a class of latent variable models. They are Markov chains trained using variational inference. The goal of diffusion models is to learn the latent structure of a dataset by modeling the way in which data points diffuse through the latent space.
+Diffusion models can be applied to a variety of tasks, including image denoising, inpainting, super-resolution, and image generation. For example, an image generation model would start with a random noise image and then, after having been trained reversing the diffusion process on natural images, the model would be able to generate new natural images. 
 [Replicate kit](https://github.com/The-Igor/replicate-kit-swift)
 
 
