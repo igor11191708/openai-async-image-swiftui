@@ -72,8 +72,9 @@ or with custom **ViewBuilder**
 
 ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun_11.png) 
 
+## More Stable Diffusion examples 
 
-## Replicate toolkit for swift. Set of diffusion models
+### Replicate toolkit for swift. Set of diffusion models
 Announced in 2022, OpenAI's text-to-image model DALL-E 2 is a recent example of diffusion models. It uses diffusion models for both the model's prior (which produces an image embedding given a text caption) and the decoder that generates the final image.
 In machine learning, diffusion models, also known as diffusion probabilistic models, are a class of latent variable models. They are Markov chains trained using variational inference. The goal of diffusion models is to learn the latent structure of a dataset by modeling the way in which data points diffuse through the latent space.
 Diffusion models can be applied to a variety of tasks, including image denoising, inpainting, super-resolution, and image generation. For example, an image generation model would start with a random noise image and then, after having been trained reversing the diffusion process on natural images, the model would be able to generate new natural images. 
@@ -82,7 +83,7 @@ Diffusion models can be applied to a variety of tasks, including image denoising
 
 ![The concept](https://github.com/The-Igor/replicate-kit-swift/raw/main/img/image_02.png) 
 
-## CoreML Stable Diffusion
+### CoreML Stable Diffusion
 [The example app](https://github.com/The-Igor/coreml-stable-diffusion-swift-example) for running text-to-image or image-to-image models to generate images using Apple's Core ML Stable Diffusion implementation
 
 ![The concept](https://github.com/The-Igor/coreml-stable-diffusion-swift-example/blob/main/img/img_01.png) 
