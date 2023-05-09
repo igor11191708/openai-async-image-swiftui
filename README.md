@@ -81,3 +81,8 @@ Diffusion models can be applied to a variety of tasks, including image denoising
 
 
 ![The concept](https://github.com/The-Igor/replicate-kit-swift/raw/main/img/image_02.png) 
+
+## CoreML Stable Diffusion
+[The example app](https://github.com/The-Igor/coreml-stable-diffusion-swift-example) for running text-to-image or image-to-image models to generate images using Apple's Core ML Stable Diffusion implementation
+
+![The concept](https://github.com/The-Igor/coreml-stable-diffusion-swift-example/blob/main/img/img_01.png) 
