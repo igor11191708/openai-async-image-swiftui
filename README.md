@@ -9,6 +9,10 @@ DALL-E and DALL-E 2 are deep learning models developed by OpenAI to generate dig
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fopenai-async-image-swiftui%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/The-Igor/openai-async-image-swiftui)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FThe-Igor%2Fopenai-async-image-swiftui%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/The-Igor/openai-async-image-swiftui)
 
+## Example for the package
+
+[OpenAI AsyncImage SwiftUI example](https://github.com/The-Igor/openai-async-image-swiftui-example)
+
 ## Features
 - [x] Multiplatform iOS, macOS, watchOS and tvOS
 - [x] Customizable in term of SwiftUI Image specs [renderingMode, resizable,  antialiased...]
@@ -64,10 +68,6 @@ or with custom **ViewBuilder**
 ## Documentation(API)
 - You need to have Xcode 13 installed in order to have access to Documentation Compiler (DocC)
 - Go to Product > Build Documentation or **⌃⇧⌘ D**
-
-## SwiftUI example for the package
-
-[OpenAI AsyncImage SwiftUI example](https://github.com/The-Igor/openai-async-image-swiftui-example)
 
 
 ![OpenAI AsyncImage SwiftUI](https://github.com/The-Igor/openai-async-image-swiftui/blob/main/image/sun_11.png) 
