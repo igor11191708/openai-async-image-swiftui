@@ -50,7 +50,7 @@ public final class OpenAIDefaultLoader : IOpenAILoader{
         
         let body = Input(prompt: prompt, size: size, response_format: .b64, n: 1)
         
-        let headers = ["Authorization": "Bearer \(endpoint.apiKey)"]
+        let headers = ["Content-Type": "application/json","Authorization": "Bearer \(endpoint.apiKey)"]
         let path = endpoint.path
         
         guard let client = client else{
