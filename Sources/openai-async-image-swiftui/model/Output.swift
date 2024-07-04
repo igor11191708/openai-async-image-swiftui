@@ -7,22 +7,24 @@
 
 import Foundation
 
-/// Output format for OpenAI API
+/// Structure representing the output format for the OpenAI API response
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-struct Output: Decodable{
+struct Output: Decodable {
     
-    /// Date and time
-    let created : Int
+    /// The creation date and time of the response in UNIX timestamp format
+    let created: Int
     
-    /// Set of images
+    /// An array of base64 encoded images
     let data: [Base64]
         
-    /// Fist image from the received data set
-    var firstImage : String?{
+    /// The first image from the received data set, if available
+    var firstImage: String? {
         data.first?.b64_json
     }
 }
 
-struct Base64: Decodable{
-    let b64_json : String
+/// Structure representing a base64 encoded image
+struct Base64: Decodable {
+    /// The base64 encoded image data in JSON format
+    let b64_json: String
 }

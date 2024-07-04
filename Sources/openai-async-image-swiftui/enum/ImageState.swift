@@ -7,17 +7,16 @@
 
 import SwiftUI
 
-/// Set of states  for ``OpenAIAsyncImage``
+/// Enumeration representing the various states of `OpenAIAsyncImage`
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-public enum ImageState{
+public enum ImageState {
     
-    /// Loading currently
+    /// State when the image is currently being loaded
     case loading
     
-    /// Loaded
+    /// State when the image has been successfully loaded
     case loaded(Image)
     
-    /// There's an error happened while fetching
+    /// State when an error occurred during image fetching
     case loadError(Error)
-    
 }
