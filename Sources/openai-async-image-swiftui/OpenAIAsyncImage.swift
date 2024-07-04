@@ -1,6 +1,6 @@
 //
 //  OpenAIAsyncImage.swift
-//  
+//
 //
 //  Created by Igor on 18.02.2023.
 //
@@ -13,44 +13,44 @@ fileprivate typealias ImageSize = OpenAIImageSize
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
     
-    /// Custom view builder tpl
+    /// Custom view builder template type alias
     public typealias ImageProcess = (ImageState) -> Content
         
-    /// Default loader
+    /// Default loader, injected from environment
     @Environment(\.openAIDefaultLoader) var defaultLoader : OpenAIDefaultLoader
     
     // MARK: - Private properties
     
-    /// OpenAI image
+    /// State variable to hold the OpenAI image
     @State private var image: Image?
         
-    /// Error
+    /// State variable to hold any errors encountered during loading
     @State private var error: Error?
         
-    /// Current task
+    /// State variable to hold the current task responsible for loading the image
     @State private var task : Task<Void, Never>?
    
     // MARK: - Config
     
-    /// A text description of the desired image(s). The maximum length is 1000 characters
+    /// A binding to the text prompt describing the desired image. The maximum length is 1000 characters
     @Binding var prompt : String
         
-    /// Custom loader
+    /// Optional custom loader conforming to `IOpenAILoader` protocol
     let loader : T?
         
-    /// Image size
+    /// The size of the image to be generated
     let size : OpenAIImageSize
         
-    /// Custom view builder tpl
+    /// Optional custom view builder template
     let tpl : ImageProcess?
     
-    // MARK: - Life circle
+    // MARK: - Life cycle
         
     /// - Parameters:
     ///   - prompt: A text description of the desired image(s). The maximum length is 1000 characters
     ///   - size: The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024
-    ///   - tpl: Custom view builder tpl
-    ///   - loader: Custom loader
+    ///   - tpl: Custom view builder template
+    ///   - loader: Custom loader conforming to `IOpenAILoader`
     public init(
         prompt : Binding<String>,
         size : OpenAIImageSize = .dpi256,
@@ -86,9 +86,9 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
         }
     }
     
-    // MARK: - Private
+    // MARK: - Private methods
        
-    /// - Returns: Current image state status
+    /// - Returns: The current image state status
     private func getState () -> ImageState{
         
         if let image { return .loaded(image) }
@@ -97,17 +97,20 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
         return .loading
     }
         
-    /// Load using default loader
+    /// Load using the default loader
+    /// - Parameters:
+    ///   - prompt: The text prompt for generating the image
+    ///   - size: The desired size of the image
     /// - Returns: OpenAI image
     private func loadImageDefault(_ prompt : String, with size : ImageSize) async throws -> Image{
         try await defaultLoader.load(prompt, with: size)
     }
     
-    /// Load image by text
+    /// Load image using the provided or default loader
     /// - Parameters:
-    ///   - prompt: Text
-    ///   - size: Image size
-    /// - Returns: Open AI Image
+    ///   - prompt: The text prompt for generating the image
+    ///   - size: The desired size of the image
+    /// - Returns: OpenAI image if successful, otherwise nil
     private func loadImage(_ prompt : String, with size : ImageSize) async -> Image?{
         do{
             if let loader = loader{
@@ -124,25 +127,28 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
         }
     }
     
-    /// - Parameter value: OpenAI image
+    /// Sets the image on the main thread
+    /// - Parameter value: The image to be set
     @MainActor
     private func setImage(_ value : Image){
         image = value
     }
     
-    /// Clear properties
+    /// Clears the image and error state properties
     @MainActor
     private func clear(){
         image = nil
         error = nil
     }
     
+    /// Cancels the current loading task if any
     private func cancelTask(){
         task?.cancel()
         task = nil
     }
     
-    /// - Returns: Task to fetch OpenAI image
+    /// Creates and returns a task to fetch the OpenAI image
+    /// - Returns: A task that fetches the OpenAI image
     private func getTask() -> Task<Void, Never>{
         Task{
             if let image = await loadImage(prompt, with: size){
@@ -152,13 +158,14 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
     }
 }
 
-// MARK: - Extension public -
+// MARK: - Public extensions -
 
 public extension OpenAIAsyncImage where Content == EmptyView, T == OpenAIDefaultLoader{
     
+    /// Convenience initializer for default loader without custom view template
     /// - Parameters:
-    ///   - prompt: Text
-    ///   - size: Image size
+    ///   - prompt: The text prompt for generating the image
+    ///   - size: The desired size of the image
     init(
         prompt : Binding<String>,
         size : OpenAIImageSize = .dpi256
@@ -172,10 +179,11 @@ public extension OpenAIAsyncImage where Content == EmptyView, T == OpenAIDefault
 
 public extension OpenAIAsyncImage where T == OpenAIDefaultLoader{
     
+    /// Convenience initializer for default loader with custom view template
     /// - Parameters:
-    ///   - prompt: Text
-    ///   - size: Image size
-    ///   - tpl: View tpl
+    ///   - prompt: The text prompt for generating the image
+    ///   - size: The desired size of the image
+    ///   - tpl: Custom view template
     init(
         prompt : Binding<String>,
         size : OpenAIImageSize = .dpi256,
@@ -188,7 +196,7 @@ public extension OpenAIAsyncImage where T == OpenAIDefaultLoader{
     }
 }
 
-// MARK: - File private -
+// MARK: - File private functions -
 
 @ViewBuilder
 fileprivate func imageTpl(_ state : ImageState) -> some View{
