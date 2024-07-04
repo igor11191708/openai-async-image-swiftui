@@ -7,7 +7,6 @@
 
 import Foundation
 
-/// Enumeration representing the various errors that can occur in `OpenAIAsyncImage`
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 enum AsyncImageErrors: Error, Equatable {
     
@@ -20,4 +19,22 @@ enum AsyncImageErrors: Error, Equatable {
     /// Error indicating that the response returned no images
     case returnedNoImages
     
+    /// Status is not valid
+    case httpStatus(String)
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension AsyncImageErrors: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .imageInit:
+            return NSLocalizedString("Unable to create image from the provided data.", comment: "")
+        case .clientIsNotDefined:
+            return NSLocalizedString("Client not found. The URL might be invalid.", comment: "")
+        case .returnedNoImages:
+            return NSLocalizedString("The response did not contain any images.", comment: "")
+        case .httpStatus(let data):
+            return NSLocalizedString("HTTP status error: \(data).", comment: "")
+        }
+    }
 }
