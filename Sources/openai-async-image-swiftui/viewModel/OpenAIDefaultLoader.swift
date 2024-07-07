@@ -58,7 +58,7 @@ public final class OpenAIDefaultLoader: IOpenAILoader {
             return try imageBase64(from: result.value)
             
         } catch {
-           try handleRequestError(error)
+            throw AsyncImageErrors.handleRequest(error)
         }
     }
     
@@ -74,16 +74,6 @@ public final class OpenAIDefaultLoader: IOpenAILoader {
         return (path, body, headers)
     }
     
-    /// Handles errors that occur during the request
-    /// - Parameter error: The error that occurred
-    private func handleRequestError(_ error: Error) throws -> Never {
-        if case let Http.Errors.status(_, _, data) = error, let responseData = data {
-            let data = String(data: responseData, encoding: .utf8) ?? "Unable to decode data"
-            throw AsyncImageErrors.httpStatus(data)
-        }
-        
-        throw error
-    }
         
     /// Decodes base64 encoded string to Data
     /// - Parameter output: The output received from the endpoint
