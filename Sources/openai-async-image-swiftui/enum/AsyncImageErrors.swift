@@ -28,8 +28,8 @@ extension AsyncImageErrors: LocalizedError {
             return NSLocalizedString("Client not found. The URL might be invalid.", comment: "")
         case .returnedNoImages:
             return NSLocalizedString("The response did not contain any images.", comment: "")
-        case .httpStatus(let status):
-            return NSLocalizedString("HTTP status error: \(status).", comment: "")
+        case .httpStatus(let description):
+            return NSLocalizedString(description, comment: "")
         case .responseError(let error):
             return error.localizedDescription
         }
