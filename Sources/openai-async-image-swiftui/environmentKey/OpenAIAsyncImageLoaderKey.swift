@@ -12,7 +12,7 @@ import SwiftUI
 public struct OpenAIDefaultLoaderKey : EnvironmentKey{
     public typealias Value = OpenAIDefaultLoader
     
-    public static var defaultValue = OpenAIDefaultLoader(endpoint: OpenAIImageEndpoint.get(with: ""))
+    public static let defaultValue = OpenAIDefaultLoader(endpoint: OpenAIImageEndpoint.get(with: ""))
 }
 
 public extension EnvironmentValues{

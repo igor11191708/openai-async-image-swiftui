@@ -14,10 +14,10 @@ public struct OpenAIImageEndpoint: IOpenAIImageEndpoint {
     // MARK: - Static Properties
     
     /// Static base URL for the OpenAI image resource
-    public static var urlString = "https://api.openai.com"
+    public static let urlString = "https://api.openai.com"
     
     /// Static path to the specific endpoint for generating images
-    public static var path = "/v1/images/generations"
+    public static let path = "/v1/images/generations"
     
     /// Creates an instance of `OpenAIImageEndpoint` with the provided API key
     /// - Parameter apiKey: API key for accessing the OpenAI API
