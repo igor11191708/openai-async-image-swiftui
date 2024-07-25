@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/The-Igor/async-http-client.git",
       "state" : {
-        "revision" : "8be7d1c1f036350a8109b075052a71d3353ad366",
-        "version" : "1.4.4"
+        "revision" : "9a56240b21baff71f5399194a1f2af9ab8c4c076",
+        "version" : "1.4.6"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/The-Igor/retry-policy-service.git",
       "state" : {
-        "revision" : "46ded002161a95c6b08ddd02c3f319891c773d14",
-        "version" : "1.0.0"
+        "revision" : "2a6a1f057fbf77337dfc73db98bd3d538127b3e2",
+        "version" : "1.0.1"
       }
     }
   ],
