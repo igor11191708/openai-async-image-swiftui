@@ -9,7 +9,7 @@ import Foundation
 
 /// Protocol defining access to the OpenAI image API
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-public protocol IOpenAIImageEndpoint {
+public protocol IOpenAIImageEndpoint: Sendable {
     
     /// Base URL for the OpenAI image resource
     var urlString: String { get }

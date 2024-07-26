@@ -17,7 +17,7 @@ import AppKit.NSImage
 #endif
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-public final class OpenAIDefaultLoader: IOpenAILoader {
+public final class OpenAIDefaultLoader: IOpenAILoader, Sendable {
     
     /// HTTP async client to handle requests
     private let client: Http.Proxy<JsonReader, JsonWriter>?
@@ -85,8 +85,21 @@ public final class OpenAIDefaultLoader: IOpenAILoader {
         
         return Data(base64Encoded: base64)
     }
-    
-#if os(iOS) || os(watchOS) || os(tvOS)
+       
+#if os(macOS)
+    /// Converts base64 encoded string to NSImage for macOS
+    /// - Parameter output: OpenAI response type
+    /// - Returns: NSImage
+    private func imageBase64(from output: Output) throws -> Image {
+        let data = try decodeBase64(from: output)
+        
+        if let data, let image = NSImage(data: data) {
+            return Image(nsImage: image)
+        }
+        
+        throw AsyncImageErrors.imageInit
+    }
+#else
     /// Converts base64 encoded string to UIImage for iOS
     /// - Parameter output: OpenAI response type
     /// - Returns: UIImage
@@ -101,18 +114,4 @@ public final class OpenAIDefaultLoader: IOpenAILoader {
     }
 #endif
     
-#if os(macOS)
-    /// Converts base64 encoded string to NSImage for macOS
-    /// - Parameter output: OpenAI response type
-    /// - Returns: NSImage
-    private func imageBase64(from output: Output) throws -> Image {
-        let data = try decodeBase64(from: output)
-        
-        if let data, let image = NSImage(data: data) {
-            return Image(nsImage: image)
-        }
-        
-        throw AsyncImageErrors.imageInit
-    }
-#endif
 }
