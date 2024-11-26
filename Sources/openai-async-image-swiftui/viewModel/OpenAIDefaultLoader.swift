@@ -38,14 +38,18 @@ public final class OpenAIDefaultLoader: IOpenAILoader, Sendable {
         client = Http.Proxy(baseURL: url)
     }
        
-    /// Loads an image from the OpenAI API based on a text prompt
+    /// Asynchronously loads an image from the OpenAI API using a text prompt and specified parameters.
     /// - Parameters:
-    ///   - prompt: The text prompt describing the desired image
-    ///   - size: The size of the generated image
-    /// - Returns: OpenAI Image
+    ///   - prompt: The text prompt describing the desired image content.
+    ///   - size: The dimensions of the generated image, specified as `OpenAIImageSize`.
+    ///   - model: The `DalleModel` used for generating the image.
+    /// - Returns: A generated `Image` object based on the prompt and size.
+    /// - Throws: An `AsyncImageErrors` if the client is undefined, the request fails,
+    ///           or the OpenAI API returns an error.
     public func load(
         _ prompt: String,
-        with size: OpenAIImageSize
+        with size: OpenAIImageSize,
+        model: DalleModel
     ) async throws -> Image {
         
         guard let client = client else {
@@ -53,7 +57,7 @@ public final class OpenAIDefaultLoader: IOpenAILoader, Sendable {
         }
         
         do {
-            let (path, body, headers) = prepareRequest(prompt: prompt, size: size)
+            let (path, body, headers) = prepareRequest(prompt: prompt, size: size, model: model)
             let result: Http.Response<Output> = try await client.post(path: path, body: body, headers: headers)
             return try imageBase64(from: result.value)
             
@@ -61,14 +65,18 @@ public final class OpenAIDefaultLoader: IOpenAILoader, Sendable {
             throw AsyncImageErrors.handleRequest(error)
         }
     }
-    
-    /// Prepares the request with the necessary parameters
+
+    /// Prepares the API request for generating an image with the given parameters.
     /// - Parameters:
-    ///   - prompt: The text prompt describing the desired image
-    ///   - size: The size of the generated image
-    /// - Returns: A tuple containing the path, body, and headers for the request
-    private func prepareRequest(prompt: String, size: OpenAIImageSize) -> (String, Input, [String: String]) {
-        let body = Input(prompt: prompt, size: size, response_format: .b64, n: 1)
+    ///   - prompt: The descriptive text prompt for generating the image.
+    ///   - size: The dimensions of the image to be generated, as `OpenAIImageSize`.
+    ///   - model: The `DalleModel` specifying the AI model to use for generation.
+    /// - Returns: A tuple containing:
+    ///   - `path`: The API endpoint path as a `String`.
+    ///   - `body`: The request payload as an `Input` object, containing model, prompt, size, and other parameters.
+    ///   - `headers`: A dictionary of HTTP headers required for the request.
+    private func prepareRequest(prompt: String, size: OpenAIImageSize, model: DalleModel) -> (String, Input, [String: String]) {
+        let body = Input(model: model.rawValue, prompt: prompt, size: size, response_format: .b64, n: 1)
         let headers = ["Content-Type": "application/json", "Authorization": "Bearer \(endpoint.apiKey)"]
         let path = endpoint.path
         return (path, body, headers)

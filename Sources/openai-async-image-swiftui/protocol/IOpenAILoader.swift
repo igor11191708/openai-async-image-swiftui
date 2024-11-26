@@ -11,10 +11,13 @@ import SwiftUI
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public protocol IOpenAILoader {
        
-    /// Asynchronously loads an image based on a provided text prompt and size
+    /// Asynchronously generates an image using a given text prompt, size, and model.
     /// - Parameters:
-    ///   - prompt: The text prompt describing the desired image
-    ///   - size: The size of the generated image
-    /// - Returns: The generated OpenAI image
-    func load(_ prompt: String, with size: OpenAIImageSize) async throws -> Image
+    ///   - prompt: A descriptive text prompt that defines the content of the desired image.
+    ///   - size: The dimensions of the generated image, specified as an `OpenAIImageSize`.
+    ///   - model: The `DalleModel` used for image generation.
+    /// - Returns: A generated `Image` based on the provided prompt and size.
+    /// - Throws: An error if the image generation process fails, such as issues with the prompt, model, or network.
+    func load(_ prompt: String, with size: OpenAIImageSize,
+              model: DalleModel) async throws -> Image
 }

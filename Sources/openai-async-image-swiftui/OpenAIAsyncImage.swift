@@ -44,21 +44,32 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
     /// Optional custom view builder template
     let tpl : ImageProcess?
     
+    /// Dall-e model type
+    let model : DalleModel
+    
     // MARK: - Life cycle
         
+    /// Initializes a view model for generating images using the OpenAI API with customizable parameters.
     /// - Parameters:
-    ///   - prompt: A text description of the desired image(s). The maximum length is 1000 characters
-    ///   - size: The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024
-    ///   - tpl: Custom view builder template
-    ///   - loader: Custom loader conforming to `IOpenAILoader`
+    ///   - prompt: A `Binding` to a `String` that represents a text description of the desired image(s).
+    ///             The maximum length for the prompt is 1000 characters.
+    ///   - size: The size of the generated images, specified as an `OpenAIImageSize`.
+    ///           Defaults to `.dpi256`. Must be one of `.dpi256` (256x256), `.dpi512` (512x512), or `.dpi1024` (1024x1024).
+    ///   - model: The `DalleModel` specifying which model to use for generating the image(s).
+    ///            Defaults to `.dalle2`.
+    ///   - tpl: A custom SwiftUI `ViewBuilder` template for processing or rendering the generated image(s).
+    ///   - loader: A custom loader conforming to the `IOpenAILoader` protocol, responsible for handling
+    ///             the image generation process, such as communicating with the OpenAI API.
     public init(
-        prompt : Binding<String>,
-        size : OpenAIImageSize = .dpi256,
-        @ViewBuilder tpl : @escaping ImageProcess,
-        loader : T
-    ){
+        prompt: Binding<String>,
+        size: OpenAIImageSize = .dpi256,
+        model: DalleModel = .dalle2,
+        @ViewBuilder tpl: @escaping ImageProcess,
+        loader: T
+    ) {
         self._prompt = prompt
         self.size = size
+        self.model = model
         self.tpl = tpl
         self.loader = loader
     }
@@ -97,32 +108,41 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
         return .loading
     }
         
-    /// Load using the default loader
+    /// Loads an image using the default loader.
     /// - Parameters:
-    ///   - prompt: The text prompt for generating the image
-    ///   - size: The desired size of the image
-    /// - Returns: OpenAI image
-    private func loadImageDefault(_ prompt : String, with size : ImageSize) async throws -> Image{
-        try await defaultLoader.load(prompt, with: size)
+    ///   - prompt: The text prompt describing the desired image content.
+    ///   - size: The dimensions of the generated image, specified as `ImageSize`.
+    ///   - model: The `DalleModel` specifying the AI model to use for image generation.
+    /// - Returns: A generated `Image` object if successful.
+    /// - Throws: An error if the image generation fails.
+    private func loadImageDefault(
+        _ prompt: String,
+        with size: ImageSize,
+        model: DalleModel
+    ) async throws -> Image {
+        try await defaultLoader.load(prompt, with: size, model: model)
     }
-    
-    /// Load image using the provided or default loader
+
+    /// Loads an image using a provided loader, or falls back to the default loader if none is provided.
     /// - Parameters:
-    ///   - prompt: The text prompt for generating the image
-    ///   - size: The desired size of the image
-    /// - Returns: OpenAI image if successful, otherwise nil
-    private func loadImage(_ prompt : String, with size : ImageSize) async -> Image?{
-        do{
-            if let loader = loader{
-                return try await loader.load(prompt, with: size)
+    ///   - prompt: The text prompt describing the desired image content.
+    ///   - size: The dimensions of the generated image, specified as `ImageSize`.
+    ///   - model: The `DalleModel` specifying the AI model to use for image generation.
+    /// - Returns: An `Image` object if successful, or `nil` if the operation fails or is cancelled.
+    private func loadImage(
+        _ prompt: String,
+        with size: ImageSize,
+        model: DalleModel
+    ) async -> Image? {
+        do {
+            if let loader = loader {
+                return try await loader.load(prompt, with: size, model: model)
             }
-            
-            return try await loadImageDefault(prompt, with: size)
-        }catch{
-            if !Task.isCancelled{
+            return try await loadImageDefault(prompt, with: size, model: model)
+        } catch {
+            if !Task.isCancelled {
                 self.error = error
             }
-            
             return nil
         }
     }
@@ -151,7 +171,7 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
     /// - Returns: A task that fetches the OpenAI image
     private func getTask() -> Task<Void, Never>{
         Task{
-            if let image = await loadImage(prompt, with: size){
+            if let image = await loadImage(prompt, with: size, model: model){
                 await setImage(image)
             }
         }
@@ -162,16 +182,20 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
 
 public extension OpenAIAsyncImage where Content == EmptyView, T == OpenAIDefaultLoader{
     
-    /// Convenience initializer for default loader without custom view template
+    /// Convenience initializer for creating an instance with the default loader and no custom view template.
     /// - Parameters:
-    ///   - prompt: The text prompt for generating the image
-    ///   - size: The desired size of the image
+    ///   - prompt: A `Binding` to a `String` containing the text prompt that describes the desired image content.
+    ///   - size: The desired size of the generated image, specified as an `OpenAIImageSize`.
+    ///           Defaults to `.dpi256`.
+    ///   - model: The `DalleModel` specifying the AI model to use for image generation. Defaults to `.dalle2`.
     init(
-        prompt : Binding<String>,
-        size : OpenAIImageSize = .dpi256
-    ){
+        prompt: Binding<String>,
+        size: OpenAIImageSize = .dpi256,
+        model: DalleModel = .dalle2
+    ) {
         self._prompt = prompt
         self.size = size
+        self.model = model
         self.tpl = nil
         self.loader = nil
     }
@@ -179,18 +203,21 @@ public extension OpenAIAsyncImage where Content == EmptyView, T == OpenAIDefault
 
 public extension OpenAIAsyncImage where T == OpenAIDefaultLoader{
     
-    /// Convenience initializer for default loader with custom view template
+    /// Convenience initializer for creating an instance with the default loader and a custom view template.
     /// - Parameters:
-    ///   - prompt: The text prompt for generating the image
-    ///   - size: The desired size of the image
-    ///   - tpl: Custom view template
+    ///   - prompt: A `Binding` to a `String` containing the text prompt that describes the desired image content.
+    ///   - size: The desired size of the generated image, specified as an `OpenAIImageSize`. Defaults to `.dpi256`.
+    ///   - model: The `DalleModel` specifying the AI model to use for image generation. Defaults to `.dalle2`.
+    ///   - tpl: A SwiftUI `@ViewBuilder` closure that provides a custom view template for processing or rendering the generated image.
     init(
-        prompt : Binding<String>,
-        size : OpenAIImageSize = .dpi256,
-        @ViewBuilder tpl : @escaping ImageProcess
-    ){
+        prompt: Binding<String>,
+        size: OpenAIImageSize = .dpi256,
+        model: DalleModel = .dalle2,
+        @ViewBuilder tpl: @escaping ImageProcess
+    ) {
         self._prompt = prompt
         self.size = size
+        self.model = model
         self.tpl = tpl
         self.loader = nil
     }
