@@ -133,18 +133,11 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
         _ prompt: String,
         with size: ImageSize,
         model: DalleModel
-    ) async -> Image? {
-        do {
+    ) async throws -> Image? {
             if let loader = loader {
                 return try await loader.load(prompt, with: size, model: model)
             }
             return try await loadImageDefault(prompt, with: size, model: model)
-        } catch {
-            if !Task.isCancelled {
-                self.error = error
-            }
-            return nil
-        }
     }
     
     /// Sets the image on the main thread
@@ -171,8 +164,14 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
     /// - Returns: A task that fetches the OpenAI image
     private func getTask() -> Task<Void, Never>{
         Task{
-            if let image = await loadImage(prompt, with: size, model: model){
-                await setImage(image)
+            do{
+                if let image = try await loadImage(prompt, with: size, model: model){
+                    setImage(image)
+                }
+            }catch is CancellationError{
+                self.error = AsyncImageErrors.cancellationError
+            }catch{
+                self.error = error
             }
         }
     }

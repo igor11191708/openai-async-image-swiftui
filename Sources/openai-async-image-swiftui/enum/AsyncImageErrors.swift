@@ -16,6 +16,7 @@ enum AsyncImageErrors: Error {
     case returnedNoImages        // No images were returned in the response
     case httpStatus(String)      // HTTP status error with a message
     case responseError(Error)    // Generic response error
+    case cancellationError
 }
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
@@ -32,6 +33,8 @@ extension AsyncImageErrors: LocalizedError {
             return NSLocalizedString(description, comment: "")
         case .responseError(let error):
             return error.localizedDescription
+        case .cancellationError:
+            return NSLocalizedString("Cancellation error.", comment: "")
         }
     }
 }
