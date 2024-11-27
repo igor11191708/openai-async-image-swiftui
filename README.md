@@ -9,7 +9,7 @@ DALL-E and DALL-E 2 are deep learning models developed by OpenAI to generate dig
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Figor11191708%2Fopenai-async-image-swiftui%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/igor11191708/openai-async-image-swiftui)
 
 ## [Example for the package](https://github.com/The-Igor/openai-async-image-swiftui-example)
-## [Documentation(API)](https://swiftpackageindex.com/igor11191708/openai-async-image-swiftui/1.2.0/documentation/openai_async_image_swiftui)
+## [Documentation(API)](https://swiftpackageindex.com/igor11191708/openai-async-image-swiftui/main/documentation/openai_async_image_swiftui)
 
 
 ## Features
