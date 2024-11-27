@@ -3,7 +3,7 @@
     {
       "identity" : "async-http-client",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/The-Igor/async-http-client.git",
+      "location" : "https://github.com/igor11191708/async-http-client.git",
       "state" : {
         "revision" : "94d2573c14bb6b88110338a0f4f4cd7b0c6f3165",
         "version" : "1.4.7"
