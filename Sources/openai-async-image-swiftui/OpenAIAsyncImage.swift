@@ -6,30 +6,23 @@
 //
 
 import SwiftUI
+import async_task
 
 fileprivate typealias ImageSize = OpenAIImageSize
+fileprivate typealias TaskModel = Async.SingleTask<Image, AsyncImageErrors>
 
 /// Async image component to load and show OpenAI image from OpenAI image API
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
+    
+    @StateObject private var taskModel = TaskModel(errorMapper: errorMapper)
     
     /// Custom view builder template type alias
     public typealias ImageProcess = (ImageState) -> Content
         
     /// Default loader, injected from environment
     @Environment(\.openAIDefaultLoader) var defaultLoader : OpenAIDefaultLoader
-    
-    // MARK: - Private properties
-    
-    /// State variable to hold the OpenAI image
-    @State private var image: Image?
-        
-    /// State variable to hold any errors encountered during loading
-    @State private var error: Error?
-        
-    /// State variable to hold the current task responsible for loading the image
-    @State private var task : Task<Void, Never>?
-   
+      
     // MARK: - Config
     
     /// A binding to the text prompt describing the desired image. The maximum length is 1000 characters
@@ -85,15 +78,13 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
             }
         }
         .onChange(of: prompt){ _ in
-            cancelTask()
-            clear()
-            task = getTask()
+            start()
         }
         .onAppear {
-           task = getTask()
+            start()
         }
         .onDisappear{
-            cancelTask()
+            cancel()
         }
     }
     
@@ -102,8 +93,8 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
     /// - Returns: The current image state status
     private func getState () -> ImageState{
         
-        if let image { return .loaded(image) }
-        else if let error { return .loadError(error)}
+        if let image = taskModel.value { return .loaded(image) }
+        else if let error = taskModel.error { return .loadError(error)}
         
         return .loading
     }
@@ -139,41 +130,18 @@ public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
             }
             return try await loadImageDefault(prompt, with: size, model: model)
     }
-    
-    /// Sets the image on the main thread
-    /// - Parameter value: The image to be set
-    @MainActor
-    private func setImage(_ value : Image){
-        image = value
-    }
-    
-    /// Clears the image and error state properties
-    @MainActor
-    private func clear(){
-        image = nil
-        error = nil
-    }
-    
-    /// Cancels the current loading task if any
-    private func cancelTask(){
-        task?.cancel()
-        task = nil
-    }
-    
+
     /// Creates and returns a task to fetch the OpenAI image
     /// - Returns: A task that fetches the OpenAI image
-    private func getTask() -> Task<Void, Never>{
-        Task{
-            do{
-                if let image = try await loadImage(prompt, with: size, model: model){
-                    setImage(image)
-                }
-            }catch is CancellationError{
-                self.error = AsyncImageErrors.cancellationError
-            }catch{
-                self.error = error
-            }
+    private func start(){
+        taskModel.start{
+            try await loadImage(prompt, with: size, model: model)
         }
+    }
+    
+    /// Cancel task
+    private func cancel(){
+        taskModel.cancel()
     }
 }
 
@@ -231,4 +199,13 @@ fileprivate func imageTpl(_ state : ImageState) -> some View{
         case .loadError(let error) : Text(error.localizedDescription)
         case .loading : ProgressView()
     }
+}
+
+@Sendable
+fileprivate func errorMapper(_ error : Error?) -> AsyncImageErrors?{
+    if error is CancellationError{
+        return .cancellationError
+    }
+    
+    return nil
 }

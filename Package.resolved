@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "async-task",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftuiux/async-task.git",
+      "state" : {
+        "revision" : "0e10077166d3b79d6fdffe4542ffc0196f63954f",
+        "version" : "1.2.3"
+      }
+    },
+    {
       "identity" : "retry-policy-service",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swiftuiux/retry-policy-service.git",
