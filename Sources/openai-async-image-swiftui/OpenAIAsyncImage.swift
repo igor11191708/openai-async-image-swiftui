@@ -15,6 +15,7 @@ fileprivate typealias TaskModel = Async.SingleTask<Image, AsyncImageErrors>
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct OpenAIAsyncImage<Content: View, T: IOpenAILoader>: View {
     
+    /// Task model for managing image loading cycle
     @StateObject private var taskModel = TaskModel(errorMapper: errorMapper)
     
     /// Custom view builder template type alias
