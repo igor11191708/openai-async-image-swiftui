@@ -193,20 +193,30 @@ public extension OpenAIAsyncImage where T == OpenAIDefaultLoader{
 
 // MARK: - File private functions -
 
+/// A function that builds the appropriate view for a given `ImageState`.
+/// - Parameter state: The current state of the image.
+/// - Returns: A SwiftUI view representing the current state of the image.
 @ViewBuilder
-fileprivate func imageTpl(_ state : ImageState) -> some View{
-    switch state{
-        case .loaded(let image) : image.resizable()
-        case .loadError(let error) : Text(error.localizedDescription)
-        case .loading : ProgressView()
+fileprivate func imageTpl(_ state: ImageState) -> some View {
+    switch state {
+    case .loaded(let image):
+        image.resizable()
+    case .loadError(let error):
+        Text(error.localizedDescription)
+    case .loading:
+        ProgressView()
     }
 }
 
+/// Maps an error to a corresponding `AsyncImageErrors` type.
+/// - Parameter error: The error to map, which may be `nil`.
+/// - Returns: An `AsyncImageErrors` value if the error can be mapped; otherwise, `nil`.
 @Sendable
-fileprivate func errorMapper(_ error : Error?) -> AsyncImageErrors?{
-    if error is CancellationError{
+fileprivate func errorMapper(_ error: Error?) -> AsyncImageErrors? {
+    if error is CancellationError {
         return .cancellationError
     }
     
+    // Return nil for other errors
     return nil
 }
