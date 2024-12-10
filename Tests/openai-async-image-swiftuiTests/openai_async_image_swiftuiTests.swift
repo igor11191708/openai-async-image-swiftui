@@ -3,9 +3,6 @@ import XCTest
 
 final class openai_async_image_swiftuiTests: XCTestCase {
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        // XCTAssertEqual(openai_async_image_swiftui().text, "Hello, World!")
+
     }
 }
