@@ -13,10 +13,11 @@ DALL-E and DALL-E 2 are deep learning models developed by OpenAI to generate dig
 
 
 ## Features
-- [x] Multiplatform iOS, macOS, watchOS and tvOS
-- [x] Customizable in term of SwiftUI Image specs [renderingMode, resizable,  antialiased...]
-- [x] Customizable in term of the transport layer [Loader]
-- [x] Based on interfaces not implementations
+- [x] Supports multiple platforms: iOS, macOS, watchOS, and tvOS  
+- [x] Customizable with SwiftUI Image properties (e.g., `renderingMode`, `resizable`, `antialiased`)  
+- [x] Configurable transport layer via custom `Loader`  
+- [x] Designed with interfaces, not implementations  
+- [x] Fully leverages Swift's new concurrency model  
 
  ![OpenAI AsyncImage SwiftUI](https://github.com/swiftuiux/openai-async-image-swiftui/blob/main/image/sun_watch.png) 
 
